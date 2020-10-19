@@ -1,0 +1,41 @@
+{
+    "name": "nggiahao/facebook-graph",
+    "description": "The Facebook Graph SDK for PHP",
+    "keywords": [
+        "nggiahao",
+        "facebook-graph",
+        "facebook sdk"
+    ],
+    "homepage": "https://github.com/nggiahao/facebook-graph",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Nguyen Gia Hao",
+            "email": "giahao9899@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nggiahao\\Facebook\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nggiahao\\Facebook\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
