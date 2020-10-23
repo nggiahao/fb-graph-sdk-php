@@ -29,9 +29,8 @@ class UsageExample
         $graph = new Facebook();
         $graph->setAccessToken($accessToken);
 
-        $user = $graph->createRequest("GET", "/me")
-                      ->setReturnType(Model\User::class)
-                      ->execute();
+        $user = $graph->request("GET", "/me")
+                      ->returnEmtry(Model\User::class) //or return Collection
 
         echo "Hello, I am $user->getName() ";
     }

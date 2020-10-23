@@ -2,6 +2,7 @@
 
 namespace Nggiahao\Facebook\Tests;
 
+use Nggiahao\Facebook\FacebookClient;
 use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
