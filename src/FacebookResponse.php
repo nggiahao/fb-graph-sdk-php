@@ -4,6 +4,8 @@
 namespace Nggiahao\Facebook;
 
 
+use Nggiahao\Facebook\Models\Factory;
+
 class FacebookResponse
 {
     protected $status_code = 200;
@@ -48,6 +50,10 @@ class FacebookResponse
     public function getBody()
     {
         return $this->body;
+    }
+
+    public function returnType($classname) {
+        return Factory::make($classname, $this->body);
     }
 
 
