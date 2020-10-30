@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Nggiahao\Facebook\Models;
+namespace Nggiahao\Facebook\Models\Factories;
 
+use Illuminate\Support\Collection;
+use Nggiahao\Facebook\Models\Model;
 
 class Factory
 {
@@ -21,5 +23,20 @@ class Factory
         } else {
             return new $classname($attribute);
         }
+    }
+
+    /**
+     * @param $classname
+     * @param array $data
+     *
+     * @return Collection
+     * @throws \Exception
+     */
+    public static function makeCollection($classname, array $data) {
+        $data = array_map(function ($item) use ($classname) {
+            return self::make($classname, $item);
+        }, $data);
+
+        return new Collection($data);
     }
 }

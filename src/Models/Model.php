@@ -4,30 +4,32 @@
 namespace Nggiahao\Facebook\Models;
 
 
-abstract class Model
-{
-    public $original = [];
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+use Nggiahao\Facebook\Models\Concerns\HasAttributes;
 
-    public $attribute = [];
+abstract class Model implements Arrayable, Jsonable
+{
+    use HasAttributes;
 
     /**
      * Model constructor.
      *
-     * @param array $attribute
+     * @param array $attributes
      */
-    public function __construct(array $attribute = [])
+    public function __construct(array $attributes = [])
     {
-        $this->original = $attribute;
-        $this->casting();
+        $this->setAttributes($attributes);
     }
 
-    /**
-     * @return $this
-     */
-    public function casting() {
-        $this->attribute = $this->original;
+    public function toArray()
+    {
+        return $this->attributesToArray();
+    }
 
-        return $this;
+    public function toJson($options = 0)
+    {
+        return json_encode($this->toArray(), $options);
     }
 
 

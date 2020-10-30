@@ -4,7 +4,8 @@
 namespace Nggiahao\Facebook;
 
 
-use Nggiahao\Facebook\Models\Factory;
+use Illuminate\Support\Collection;
+use Nggiahao\Facebook\Models\Factories\Factory;
 
 class FacebookResponse
 {
@@ -52,8 +53,25 @@ class FacebookResponse
         return $this->body;
     }
 
+    /**
+     * @param $classname
+     *
+     * @return mixed
+     * @throws \Exception
+     */
     public function returnType($classname) {
-        return Factory::make($classname, $this->body);
+        return Factory::make($classname, $this->getBody());
+    }
+
+    /**
+     * @param $classname
+     *
+     * @return Collection
+     * @throws \Exception
+     */
+    public function returnCollection($classname) {
+        $body = $this->getBody();
+        return Factory::makeCollection($classname, $body['data']);
     }
 
 
