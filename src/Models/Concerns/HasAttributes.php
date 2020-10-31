@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
+use Nggiahao\Facebook\Models\Caster\AttachmentCaster;
+use Nggiahao\Facebook\Models\Caster\CastsAttributes;
 use Nggiahao\Facebook\Support\Helpers;
 
 trait HasAttributes
@@ -33,8 +35,19 @@ trait HasAttributes
      */
     protected $casts = [];
 
+    /**
+     * @var string[]
+     */
     protected static $default_casts = [
-
+        'created_time' => 'datetime',
+        'updated_time' => 'datetime',
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+        'backdated_time' => 'datetime',
+        'issued_at' => 'datetime',
+        'expires_at' => 'datetime',
+        'publish_time' => 'datetime',
+        'joined' => 'datetime',
     ];
 
     /**
@@ -58,6 +71,11 @@ trait HasAttributes
      */
     protected static $mutatorCache = [];
 
+    /**
+     * @param $name
+     *
+     * @return mixed|null
+     */
     public function __get($name) {
         if ($this->hasGetMutator($name)) {
             return $this->mutateAttribute($name, $this->getAttribute($name));
@@ -68,6 +86,12 @@ trait HasAttributes
         }
     }
 
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return HasAttributes
+     */
     public function __set($key, $value) {
         return $this->setAttribute($key, $value);
     }
@@ -167,6 +191,10 @@ trait HasAttributes
         $cast_type = $this->getCastType($key);
         if (is_null($value)) {
             return null;
+        }
+
+        if (is_subclass_of($cast_type, CastsAttributes::class)) {
+            return (new $cast_type)->get($value);
         }
 
         switch ($cast_type) {
