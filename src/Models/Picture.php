@@ -4,7 +4,7 @@
 namespace Nggiahao\Facebook\Models;
 
 
-class User extends Model
+class Picture extends Model
 {
-
+    
 }

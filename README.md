@@ -32,7 +32,7 @@ class UsageExample
         $user = $graph->request("GET", "/me")
                       ->returnEmtry(Model\User::class) //or return Collection
 
-        echo "Hello, I am $user->getName() ";
+        echo "Hello, I am $user->name ";
     }
 }
 ```
