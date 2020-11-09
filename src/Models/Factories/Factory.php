@@ -33,6 +33,11 @@ class Factory
      * @throws \Exception
      */
     public static function makeCollection($classname, array $data) {
+//        if (!empty($data['paging'])) {
+//            $paging = $data['paging'];
+//            unset($data['paging']);
+//        }
+
         $data = array_map(function ($item) use ($classname) {
             return self::make($classname, $item);
         }, $data);

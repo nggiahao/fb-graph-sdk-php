@@ -1,0 +1,19 @@
+{
+  "user": {
+    "access_token": "token",
+    "user_name": "",
+    "id": ""
+  },
+  "fanpage": {
+    "id": "",
+    "name": ""
+  },
+  "group": {
+    "id": "",
+    "name": ""
+  },
+  "feed": {
+    "id": "",
+    "message": ""
+  }
+}

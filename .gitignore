@@ -2,6 +2,7 @@ build
 composer.phar
 composer.lock
 vendor
+tests/test.json
 coverage
 .idea
 .phpunit.result.cache

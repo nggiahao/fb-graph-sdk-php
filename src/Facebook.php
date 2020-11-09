@@ -2,12 +2,14 @@
 
 namespace Nggiahao\Facebook;
 
-use GuzzleHttp\Exception\GuzzleException;
+use Nggiahao\Facebook\Http\FacebookRequest;
 
 class Facebook
 {
     const VERSION = "0.1";
     const DEFAULT_GRAPH_VERSION = "v7.0";
+    const BASE_GRAPH_URL = 'https://graph.facebook.com';
+
 
     /**
      * @var String The Graph API version for requests.
@@ -15,32 +17,28 @@ class Facebook
     protected $graph_version;
 
     /**
-     * @var FacebookClient The Facebook client service.
-     */
-    protected $client;
-
-    /**
      * @var String The access token to use with requests
      */
     protected $access_token;
 
     /**
-     * @var array The config for Facebook SDK
+     * The port to use for proxy requests
+     * Null disables port forwarding
+     *
+     * @var string
      */
-    protected $config;
+    protected $proxy;
 
     /**
      * Facebook constructor.
      *
-     * @param array $config
+     * @param string|null $access_token
+     * @param string|null $graph_version
      */
-    public function __construct(array $config = [])
+    public function __construct(string $access_token = null, string $graph_version = null)
     {
-        $this->config = array_merge([], $config);
-        $this->setGraphVersion($this->config['graph_version'] ?? self::DEFAULT_GRAPH_VERSION);
-        $this->setAccessToken($this->config['access_token'] ?? null);
-
-        $this->client = new FacebookClient();
+        $this->setGraphVersion($graph_version ?? self::DEFAULT_GRAPH_VERSION);
+        $this->setAccessToken($access_token);
     }
 
     /**
@@ -69,54 +67,49 @@ class Facebook
     }
 
     /**
-     * Returns the FacebookClient service.
+     * Sets the proxy port. This allows you
+     * to use tools such as Fiddler to view
+     * requests and responses made with Guzzle
      *
-     * @return FacebookClient
+     * @param string $proxy
+     *
+     * @return $this
      */
-    public function getClient()
+    public function setProxy(string $proxy): Facebook
     {
-        return $this->client;
+        $this->proxy = $proxy;
+        return $this;
     }
 
     /**
-     * @param string $method
-     * @param string $uri
-     * @param array $option
+     * Creates a new request object with the given Graph information
      *
-     * @return FacebookResponse
-     * @throws GuzzleException
+     * @param string $method The HTTP method to use, e.g. "GET" or "POST"
+     * @param string $endpoint The Graph endpoint to call
+     *
+     * @return FacebookRequest
+     * @throws Exception\InvalidAccessTokenFacebook
      */
-    public function request(string $method, string $uri, array $option = []): FacebookResponse {
-        $option = array_merge([
-            'access_token' => $this->access_token,
-            'graph_version' => $this->graph_version
-        ], $option);
-
-        return $this->client->request($method, $uri, $option);
+    public function createRequest(string $method, string $endpoint): FacebookRequest
+    {
+        return new FacebookRequest(
+            $method,
+            $endpoint,
+            $this->access_token,
+            $this->graph_version,
+            $this->proxy
+        );
     }
 
     /**
-     * @param string $uri
-     * @param array $option
+     * Creates a new collection request object with the given
+     * Graph information
      *
-     * @return FacebookResponse
-     * @throws GuzzleException
+     * @param string $method The HTTP method to use, e.g. "GET" or "POST"
+     * @param string $endpoint The Graph endpoint to call
      */
-    public function get(string $uri, array $option = []): FacebookResponse {
+    public function createCollectionRequest(string $method, string $endpoint)
+    {
 
-        return $this->request('GET' ,$uri, $option);
     }
-
-    /**
-     * @param string $uri
-     * @param array $option
-     *
-     * @return FacebookResponse
-     * @throws GuzzleException
-     */
-    public function post(string $uri, array $option = []): FacebookResponse {
-
-        return $this->request('POST' ,$uri, $option);
-    }
-
 }
