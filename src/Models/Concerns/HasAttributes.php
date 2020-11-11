@@ -39,6 +39,7 @@ trait HasAttributes
      * @var string[]
      */
     protected static $default_casts = [
+        'birthday' => 'datetime',
         'created_time' => 'datetime',
         'updated_time' => 'datetime',
         'start_time' => 'datetime',

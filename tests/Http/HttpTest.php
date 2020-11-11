@@ -1,12 +1,7 @@
 <?php
 namespace Nggiahao\Facebook\Tests\Http;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Response;
 use Nggiahao\Facebook\Exception\InvalidAccessTokenFacebook;
 use Nggiahao\Facebook\Http\FacebookRequest;
 use Nggiahao\Facebook\Http\FacebookResponse;
