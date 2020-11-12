@@ -4,12 +4,11 @@
 namespace Nggiahao\Facebook\Models;
 
 
-
 use Nggiahao\Facebook\Models\Caster\AttachmentCaster;
 use Nggiahao\Facebook\Models\Caster\CommentCaster;
 use Nggiahao\Facebook\Models\Caster\UserCaster;
 
-class Feed extends Model
+class Comment extends Model
 {
     protected $casts = [
         'attachments' => AttachmentCaster::class,

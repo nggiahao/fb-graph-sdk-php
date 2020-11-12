@@ -107,9 +107,18 @@ class Facebook
      *
      * @param string $method The HTTP method to use, e.g. "GET" or "POST"
      * @param string $endpoint The Graph endpoint to call
+     *
+     * @return FacebookRequest
+     * @throws Exception\InvalidAccessTokenFacebook
      */
     public function createCollectionRequest(string $method, string $endpoint)
     {
-
+        return new FacebookRequest(
+            $method,
+            $endpoint,
+            $this->access_token,
+            $this->graph_version,
+            $this->proxy
+        );
     }
 }
