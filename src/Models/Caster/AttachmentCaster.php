@@ -17,9 +17,14 @@ class AttachmentCaster implements CastsAttributes
         } elseif (isset($value['data'])) {
             $attachments = $value['data'];
         } elseif ($value) {
-            $attachments = [$value];
+            return new Attachment([
+                'id' => $value['target']['id'] ?? null,
+                'type' => $value['type'] ?? null,
+                'url' => $value['target']['url'] ?? null,
+                'src' => $value['media']['image']['src'] ?? null
+            ]);
         } else {
-            $attachments = [];
+            return null;
         }
 
         $attachments = array_map(function ($attachment) {
