@@ -1,8 +1,6 @@
 # Facebook Graph SDK for PHP
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nggiahao/facebook-graph.svg?style=flat-square)](https://packagist.org/packages/nggiahao/facebook-graph)
-[![Build Status](https://img.shields.io/travis/nggiahao/facebook-graph/master.svg?style=flat-square)](https://travis-ci.org/nggiahao/facebook-graph)
-[![Quality Score](https://img.shields.io/scrutinizer/g/nggiahao/facebook-graph.svg?style=flat-square)](https://scrutinizer-ci.com/g/nggiahao/facebook-graph)
 [![Total Downloads](https://img.shields.io/packagist/dt/nggiahao/facebook-graph.svg?style=flat-square)](https://packagist.org/packages/nggiahao/facebook-graph)
 
 
